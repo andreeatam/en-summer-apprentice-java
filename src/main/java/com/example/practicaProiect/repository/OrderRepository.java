@@ -1,5 +1,6 @@
 package com.example.practicaProiect.repository;
 
+import com.example.practicaProiect.Dto.OrderDto;
 import com.example.practicaProiect.model.Event;
 import com.example.practicaProiect.model.Order;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface OrderRepository extends CrudRepository<Order,Integer> {
 
     @Query("SELECT o FROM Order o")
-    public List<Order> findAllOrders();
+    public List<OrderDto> findAllOrders();
 
     public List<Order> findAllOrdersByUser_UserID(Integer userID);
 }

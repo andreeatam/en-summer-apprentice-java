@@ -1,19 +1,23 @@
 package com.example.practicaProiect.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Table(name="Orders")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private int orderID;
 
     @ManyToOne
     @JoinColumn(name="UserID")
+    @JsonIgnore
     private User user;
 
     @ManyToOne
@@ -21,10 +25,10 @@ public class Order implements Serializable {
     private TicketCategory ticketCategory;
 
     @Column(name="OrderedAt")
-    private Date orderedAt;
+    private LocalDateTime orderedAt;
 
     @Column(name="NumberOfTickets")
-    private float numberOfTickets;
+    private int numberOfTickets;
 
     @Column(name="TotalPrice")
     private float totalPrice;
@@ -32,14 +36,15 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(int orderID, User userID, TicketCategory ticketCategoryID, Date orderedAt, float numberOfTickets, float totalPrice) {
-        this.orderID = orderID;
+    public Order(int orderID,User userID, TicketCategory ticketCategoryID, LocalDateTime orderedAt, int numberOfTickets, float totalPrice) {
         this.user = userID;
+        this.orderID=orderID;
         this.ticketCategory = ticketCategoryID;
         this.orderedAt = orderedAt;
         this.numberOfTickets = numberOfTickets;
         this.totalPrice = totalPrice;
     }
+
 
     public int getOrderID() {
         return orderID;
@@ -53,8 +58,8 @@ public class Order implements Serializable {
         return user;
     }
 
-    public void setUser(User userID) {
-        this.user = userID;
+    public void setUser(Optional<User> user) {
+        this.user = user.get();
     }
 
     public TicketCategory getTicketCategory() {
@@ -65,19 +70,19 @@ public class Order implements Serializable {
         this.ticketCategory = ticketCategoryID;
     }
 
-    public Date getOrderedAt() {
+    public LocalDateTime getOrderedAt() {
         return orderedAt;
     }
 
-    public void setOrderedAt(Date orderedAt) {
+    public void setOrderedAt(LocalDateTime orderedAt) {
         this.orderedAt = orderedAt;
     }
 
-    public float getNumberOfTickets() {
+    public int getNumberOfTickets() {
         return numberOfTickets;
     }
 
-    public void setNumberOfTickets(float numberOfTickets) {
+    public void setNumberOfTickets(int numberOfTickets) {
         this.numberOfTickets = numberOfTickets;
     }
 
@@ -87,6 +92,18 @@ public class Order implements Serializable {
 
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderID=" + orderID +
+                ", user=" + user +
+                ", ticketCategory=" + ticketCategory +
+                ", orderedAt=" + orderedAt +
+                ", numberOfTickets=" + numberOfTickets +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }
 

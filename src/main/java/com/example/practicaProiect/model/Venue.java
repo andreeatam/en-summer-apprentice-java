@@ -62,5 +62,15 @@ public class Venue implements Serializable {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
+    @Override
+    public String toString() {
+        return "Venue{" +
+                "venueID=" + venueID +
+                ", location='" + location + '\'' +
+                ", type='" + type + '\'' +
+                ", capacity=" + capacity +
+                '}';
+    }
 }
 

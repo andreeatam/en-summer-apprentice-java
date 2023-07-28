@@ -1,5 +1,8 @@
 package com.example.practicaProiect.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -7,9 +10,12 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Event")
+
 public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,25 +23,33 @@ public class Event implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="VenueID")
+    @JsonIgnore
     private Venue venue;
 
     @ManyToOne
     @JoinColumn(name="EventTypeID")
+    @JsonIgnore
     private EventType eventType;
 
     @Column(name="Name")
+    @JsonIgnore
     private String name;
 
     @Column(name="Description")
+    @JsonIgnore
     private String description;
 
     @Column(name="StartDate")
+    @JsonIgnore
     private LocalDateTime startDate;
 
     @Column(name="EndDate")
+    @JsonIgnore
     private LocalDateTime endDate;
 
-
+    @OneToMany(mappedBy = "event")
+    @JsonManagedReference
+    private List<TicketCategory> ticketCategoryList;
     public Event() {
     }
 
@@ -47,6 +61,14 @@ public class Event implements Serializable {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public List<TicketCategory> getTicketCategoryList() {
+        return ticketCategoryList;
+    }
+
+    public void setTicketCategoryList(List<TicketCategory> ticketCategoryList) {
+        this.ticketCategoryList = ticketCategoryList;
     }
 
     public int getEventID() {
@@ -103,6 +125,19 @@ public class Event implements Serializable {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventID=" + eventID +
+                ", venue=" + venue +
+                ", eventType=" + eventType +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
     }
 }
 

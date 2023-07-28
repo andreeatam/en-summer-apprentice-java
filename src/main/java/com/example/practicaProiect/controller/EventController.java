@@ -1,5 +1,6 @@
 package com.example.practicaProiect.controller;
 
+import com.example.practicaProiect.Dto.EventDTO;
 import com.example.practicaProiect.model.Event;
 import com.example.practicaProiect.repository.EventRepository;
 import com.example.practicaProiect.service.EventService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -25,14 +27,23 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    //ok
     @GetMapping("/event")
     public List<Event> getAllEvents(@RequestParam (name="venueId") int newVenueID, @RequestParam(name="eventType") String eventTypeName){
-        return eventService.getFilteredByVenue_EventType(newVenueID,eventTypeName);
+        return eventService.eventFind(newVenueID,eventTypeName);
     }
 
     @PostMapping("/createEvent")
     public Event createNewEvent(@RequestBody Event newEvent) {
         return eventService.createEvent(newEvent);
     }
+
+    @GetMapping("/event/findBy")
+    public List<EventDTO> eventFindBy(@RequestParam int venueID, @RequestParam String eventTypeName){
+        List<Event> events= eventService.eventFind(venueID, eventTypeName);
+        //System.out.println(events);
+        return events.stream().map(EventService::eventFindBy).collect(Collectors.toList());
+    }
+
 
 }

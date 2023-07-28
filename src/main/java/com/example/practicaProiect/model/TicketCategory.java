@@ -1,5 +1,7 @@
 package com.example.practicaProiect.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -16,9 +18,11 @@ public class TicketCategory {
     private Event event;
 
     @Column(name="Description")
+    @JsonIgnore
     private String description;
 
     @Column(name="Price")
+    @JsonIgnore
     private Float price;
 
     public TicketCategory() {
@@ -61,5 +65,15 @@ public class TicketCategory {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketCategory{" +
+                "TicketCategoryID=" + TicketCategoryID +
+                ", event=" + event +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
