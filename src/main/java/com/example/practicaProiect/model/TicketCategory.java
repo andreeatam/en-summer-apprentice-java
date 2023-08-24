@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public class TicketCategory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int TicketCategoryID;
 
     @ManyToOne
@@ -29,7 +29,7 @@ public class TicketCategory {
     }
 
     public TicketCategory(int ticketCategoryID, Event eventID, String description, Float price) {
-        TicketCategoryID = ticketCategoryID;
+        this.TicketCategoryID = ticketCategoryID;
         this.event = eventID;
         this.description = description;
         this.price = price;

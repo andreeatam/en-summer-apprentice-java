@@ -18,7 +18,6 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
     List<Event> findByVenue_VenueIDAndEventType_Name(int venueID, String nameType);
 
 
-
     /* sau: @Query("SELECT e FROM Event e WHERE e.venue.venueId = :venue_id AND e.eventType.name = :type_name")
     List<Event> searchByVenueAndType(@Param("venue_id") int venue_id, @Param("type_name") String type_name);
     */

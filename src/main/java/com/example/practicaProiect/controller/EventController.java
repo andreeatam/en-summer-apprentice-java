@@ -27,10 +27,14 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    //ok
     @GetMapping("/event")
     public List<Event> getAllEvents(@RequestParam (name="venueId") int newVenueID, @RequestParam(name="eventType") String eventTypeName){
         return eventService.eventFind(newVenueID,eventTypeName);
+    }
+
+    @GetMapping("/allEvents")
+    public List<Event> getAllEventsFromBD(){
+        return eventService.getAllEvents();
     }
 
     @PostMapping("/createEvent")
@@ -41,7 +45,6 @@ public class EventController {
     @GetMapping("/event/findBy")
     public List<EventDTO> eventFindBy(@RequestParam int venueID, @RequestParam String eventTypeName){
         List<Event> events= eventService.eventFind(venueID, eventTypeName);
-        //System.out.println(events);
         return events.stream().map(EventService::eventFindBy).collect(Collectors.toList());
     }
 

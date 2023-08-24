@@ -11,7 +11,7 @@ import java.util.Optional;
 @Table(name="Orders")
 public class Order implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private int orderID;
 

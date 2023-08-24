@@ -15,10 +15,5 @@ public class OrderToOrderDtoMapper {
         orderDto.setTotalPrice(order.getTotalPrice());
         return orderDto;
     }
-//    public Order AddOrderDtoToOrder(AddOrderDTO addOrderDTO){
-//        Order orderDto=new Order();
-//        orderDto.setNumberOfTickets(addOrderDTO.getNumberOfTickets());
-//        orderDto.setTicketCategory(addOrderDTO.getTicketCategoryID());
-//        return orderDto;
-//    }
+
 }

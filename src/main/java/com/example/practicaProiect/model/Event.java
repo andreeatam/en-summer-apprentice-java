@@ -18,33 +18,33 @@ import java.util.List;
 
 public class Event implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int eventID;
 
     @ManyToOne
     @JoinColumn(name="VenueID")
-    @JsonIgnore
+    //@JsonIgnore
     private Venue venue;
 
     @ManyToOne
     @JoinColumn(name="EventTypeID")
-    @JsonIgnore
+    //@JsonIgnore
     private EventType eventType;
 
     @Column(name="Name")
-    @JsonIgnore
+    //@JsonIgnore
     private String name;
 
     @Column(name="Description")
-    @JsonIgnore
+    //@JsonIgnore
     private String description;
 
     @Column(name="StartDate")
-    @JsonIgnore
+    //@JsonIgnore
     private LocalDateTime startDate;
 
     @Column(name="EndDate")
-    @JsonIgnore
+    //@JsonIgnore
     private LocalDateTime endDate;
 
     @OneToMany(mappedBy = "event")

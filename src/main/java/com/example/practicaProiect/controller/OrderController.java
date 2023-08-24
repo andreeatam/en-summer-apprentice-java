@@ -24,7 +24,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    //ok
+
     @GetMapping("/order")
     public ResponseEntity<List<OrderDto>>getOrders(){
         int userID=3;
@@ -36,12 +36,5 @@ public class OrderController {
     public Order createOrder(@RequestBody AddOrderDTO addOrderDTO) throws Exception {
         return orderService.createOrder(addOrderDTO);
     }
-
-    //ok
-//    @PostMapping("/createOrder")
-//    public ResponseEntity<OrderDto> addNewOrder(@RequestBody NewOrder newOrder){
-//        OrderDto orderDto = orderService.addOrder(newOrder);
-//        return new ResponseEntity<>(orderDto, HttpStatus.OK);
-//    }
 
 }

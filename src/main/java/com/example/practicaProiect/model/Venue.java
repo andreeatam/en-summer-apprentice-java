@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Table(name="Venue")
 public class Venue implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int venueID;
 
     @Column(name="Location")
